@@ -1,0 +1,60 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: hw5-low
+value: 100
+globalDefault: false
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: hw5-high
+value: 1000
+globalDefault: false
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: low-priority
+  namespace: hw5
+spec:
+  priorityClassName: hw5-low
+  terminationGracePeriodSeconds: 0
+  containers:
+  - name: hold
+    image: hw5-pairs:local
+    imagePullPolicy: Never
+    command:
+    - /bin/sh
+    - -c
+    - sleep 3600
+    resources:
+      requests:
+        cpu: '12'
+        memory: 64Mi
+      limits:
+        cpu: '12'
+        memory: 128Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-priority
+  namespace: hw5
+spec:
+  priorityClassName: hw5-high
+  containers:
+  - name: hold
+    image: hw5-pairs:local
+    imagePullPolicy: Never
+    command:
+    - /bin/sh
+    - -c
+    - sleep 3600
+    resources:
+      requests:
+        cpu: '6'
+        memory: 64Mi
+      limits:
+        cpu: '6'
+        memory: 128Mi

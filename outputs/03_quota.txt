@@ -1,0 +1,2 @@
+pod/quota-one created
+Error from server (Forbidden): error when creating "STDIN": pods "quota-two" is forbidden: exceeded quota: hw5-limits, requested: pods=1, used: pods=1, limited: pods=1

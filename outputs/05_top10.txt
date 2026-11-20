@@ -1,0 +1,11 @@
+skills,count
+android | kotlin,805
+java | kotlin,747
+ios | swift,580
+android sdk | kotlin,517
+android | android sdk,460
+android | java,430
+android | git,376
+git | kotlin,359
+android sdk | java,335
+android | ios,299

@@ -1,0 +1,6 @@
+Scheduled   Successfully assigned hw5/low-six to hw5-mematvey-control-plane
+Pulled      Container image "hw5-pairs:local" already present on machine and can be accessed by the pod
+Created     Container created
+Started     Container started
+Preempted   Preempted by pod 7ec42ed9-7921-448d-a591-330d3c53c49f on node hw5-mematvey-control-plane
+Killing     Stopping container hold

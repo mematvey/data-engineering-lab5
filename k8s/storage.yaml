@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hw5
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rustfs-credentials
+  namespace: hw5
+type: Opaque
+stringData:
+  access: mematvey
+  secret: mematvey-secret-123
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustfs-six
+  namespace: hw5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rustfs-six
+  template:
+    metadata:
+      labels:
+        app: rustfs-six
+    spec:
+      containers:
+      - name: rustfs
+        image: rustfs/rustfs:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RUSTFS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: access
+        - name: RUSTFS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: secret
+        - name: RUSTFS_VOLUMES
+          value: /data/rustfs{0...5}
+        - name: RUSTFS_ADDRESS
+          value: :9000
+        - name: RUSTFS_UNSAFE_BYPASS_DISK_CHECK
+          value: 'true'
+        ports:
+        - containerPort: 9000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+        volumeMounts:
+        - name: disk0
+          mountPath: /data/rustfs0
+        - name: disk1
+          mountPath: /data/rustfs1
+        - name: disk2
+          mountPath: /data/rustfs2
+        - name: disk3
+          mountPath: /data/rustfs3
+        - name: disk4
+          mountPath: /data/rustfs4
+        - name: disk5
+          mountPath: /data/rustfs5
+      volumes:
+      - name: disk0
+        emptyDir: {}
+      - name: disk1
+        emptyDir: {}
+      - name: disk2
+        emptyDir: {}
+      - name: disk3
+        emptyDir: {}
+      - name: disk4
+        emptyDir: {}
+      - name: disk5
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustfs-six
+  namespace: hw5
+spec:
+  selector:
+    app: rustfs-six
+  ports:
+  - port: 9000
+    targetPort: 9000

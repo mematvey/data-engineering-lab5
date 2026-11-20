@@ -1,0 +1,5 @@
+FailedScheduling   0/1 nodes are available: 1 Insufficient cpu. preemption: found a potential placement for pod on node hw5-mematvey-control-plane, preempting 1 victims
+Scheduled          Successfully assigned hw5/high-six to hw5-mematvey-control-plane
+Pulled             Container image "hw5-pairs:local" already present on machine and can be accessed by the pod
+Created            Container created
+Started            Container started

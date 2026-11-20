@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pairs
+  namespace: hw5
+spec:
+  completionMode: Indexed
+  completions: 4
+  parallelism: 2
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: pairs
+        image: hw5-pairs:local
+        imagePullPolicy: Never
+        args:
+        - worker
+        - --count
+        - '4'
+        env:
+        - name: S3_ENDPOINT
+          value: http://rustfs-six:9000
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: access
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: secret
+        resources:
+          requests:
+            cpu: 250m
+            memory: 192Mi
+          limits:
+            cpu: '1'
+            memory: 256Mi

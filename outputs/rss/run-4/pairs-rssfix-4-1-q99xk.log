@@ -1,0 +1,16 @@
+part=1 chunk=1 pairs=455
+part=1 chunk=5 pairs=1059
+part=1 chunk=9 pairs=1820
+part=1 chunk=13 pairs=2371
+part=1 chunk=17 pairs=2719
+part=1 chunk=21 pairs=3394
+part=1 chunk=25 pairs=3906
+part=1 chunk=29 pairs=4365
+part=1 chunk=33 pairs=4699
+part=1 chunk=37 pairs=5035
+part=1 chunk=41 pairs=5301
+part=1 chunk=45 pairs=5538
+part=1 chunk=49 pairs=5956
+saved=results/k8s/parts/1.json chunks=13
+elapsed_seconds=3.742 memory_peak_bytes=174493696
+rss_peak_kib=170432

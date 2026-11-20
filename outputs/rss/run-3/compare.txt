@@ -1,0 +1,3 @@
+rows: hw3=14646 k8s=14646
+top10 equal: True
+all rows equal: True

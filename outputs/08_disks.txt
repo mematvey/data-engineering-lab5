@@ -1,0 +1,6 @@
+280M	/data/rustfs0
+280M	/data/rustfs1
+280M	/data/rustfs2
+280M	/data/rustfs3
+280M	/data/rustfs4
+280M	/data/rustfs5

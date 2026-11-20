@@ -1,0 +1,14 @@
+part=3 chunk=3 pairs=886
+part=3 chunk=7 pairs=1356
+part=3 chunk=11 pairs=1859
+part=3 chunk=15 pairs=2156
+part=3 chunk=19 pairs=2709
+part=3 chunk=23 pairs=3079
+part=3 chunk=27 pairs=3428
+part=3 chunk=31 pairs=4369
+part=3 chunk=35 pairs=4887
+part=3 chunk=39 pairs=4977
+part=3 chunk=43 pairs=5307
+part=3 chunk=47 pairs=5804
+saved=results/k8s/parts/3.json chunks=12
+elapsed_seconds=3.026 memory_peak_bytes=174297088

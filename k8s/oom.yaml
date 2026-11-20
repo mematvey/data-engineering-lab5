@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pairs-oom
+  namespace: hw5
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: pairs
+        image: hw5-pairs:local
+        imagePullPolicy: Never
+        args:
+        - worker
+        env:
+        - name: S3_ENDPOINT
+          value: http://rustfs-six:9000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 8Mi
+          limits:
+            cpu: 500m
+            memory: 8Mi

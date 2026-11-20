@@ -1,0 +1,7 @@
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+WORKDIR /app
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+COPY src/ ./src/
+ENV PYTHONUNBUFFERED=1
+ENTRYPOINT ["/app/.venv/bin/python", "src/pairs.py"]

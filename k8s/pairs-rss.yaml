@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pairs-rss
+  namespace: hw5
+spec:
+  completionMode: Indexed
+  completions: 4
+  parallelism: 2
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: pairs
+        image: hw5-pairs:local
+        imagePullPolicy: Never
+        command:
+        - /app/.venv/bin/python
+        - -c
+        - |
+          import resource
+          import runpy
+          import sys
+
+          sys.path.insert(0, "src")
+          sys.argv = ["src/pairs.py", "worker", "--count", "4"]
+          runpy.run_path("src/pairs.py", run_name="__main__")
+          peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+          print(f"rss_peak_kib={peak}", flush=True)
+        env:
+        - name: S3_ENDPOINT
+          value: http://rustfs-six:9000
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: access
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rustfs-credentials
+              key: secret
+        resources:
+          requests:
+            cpu: 250m
+            memory: 192Mi
+          limits:
+            cpu: '1'
+            memory: 256Mi
